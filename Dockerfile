@@ -1,11 +1,8 @@
 FROM alpine:latest
 
 RUN   apk update \
- &&   apk add ca-certificates wget pwgen bash \
+ &&   apk add ca-certificates pwgen bash curl \
  &&   update-ca-certificates
 
-RUN wget 'https://cli.run.pivotal.io/stable?release=linux64-binary&source=github' \
-  && mv 'stable?release=linux64-binary&source=github' cf.tar.gz \
-  && tar -xf cf.tar.gz -C /usr/local/bin/ \
-  && rm cf.tar.gz
+RUN curl -L 'https://cli.run.pivotal.io/stable?release=linux64-binary&source=github' | tar -zx -C /usr/local/bin/
 
